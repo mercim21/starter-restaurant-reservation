@@ -60,4 +60,55 @@ async function update(req, res) {
     await reservationsService.updateStatus(updatedReservation);
     res.json({ data });
   }
+ 
+function validateReservationIsSeated(req, res, next) {
+    const { status } = res.locals.reservation;
+  
+    if (status === "seated") {
+      return next({
+        status: 400,
+        message: "This reservation is already seated",
+      });
+    }
+    next();
+  }
+  
+  // validate whether the input has valid properties
+  function hasOnlyValidProperties(req, res, next) {
+    const { data = {} } = req.body;
+    const invalidFields = Object.keys(data).filter(
+      (field) => !VALID_PROPERTIES.includes(field)
+    );
+    if (invalidFields.length) {
+      return next({
+        status: 400,
+        message: `Invalid field(s): ${invalidFields.join(", ")}`,
+      });
+    }
+    next();
+  }
+  
+  function hasData(req, res, next) {
+    const data = req.body.data;
+    if (!data) {
+      return next({
+        status: 400,
+        message: `Request body must have data.`,
+      });
+    }
+    next();
+  }
+  
+  // validate that a table exists
+  async function tableExists(req, res, next) {
+    const table = await tablesService.read(req.params.table_id);
+    if (table) {
+      res.locals.table = table;
+      return next();
+    }
+    next({
+      status: 404,
+      message: `table ${req.params.table_id} cannot be found.`,
+    });
+  }
   
