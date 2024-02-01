@@ -1,4 +1,5 @@
 const request = require("supertest");
+global.TextEncoder = require('util').TextEncoder;
 
 const app = require("../src/app");
 const knex = require("../src/db/connection");
