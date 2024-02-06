@@ -14,18 +14,7 @@ function ReservationForm({
   const [reservationData, setReservationData] = useState({ ...initialState });
 
   const handleReservationUpdate = (event) => {
-    const { name, value } = event.target;
-  
-    if (name === "mobile_number") {
-      // Remove all non-numeric characters to clean the input
-      let cleaned = value.replace(/\D+/g, '');
-  
-      // Insert dashes after the third and sixth digits
-      if (cleaned.length > 3 && cleaned.length <= 6) {
-        cleaned = `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
-      } else if (cleaned.length > 6) {
-        cleaned = `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6, 10)}`;
-      }
+    if (event.target.name === "people") {
       setReservationData({
         ...reservationData,
         [event.target.name]: Number(event.target.value),
