@@ -34,7 +34,7 @@ function SearchReservation() {
           <input
             name="mobile_number"
             type="text"
-            maxLength="10"
+            maxLength="12"
             required={true}
             className="form-control"
             placeholder="Find a Reservation"
