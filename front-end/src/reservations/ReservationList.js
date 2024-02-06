@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import CancelReservation from "./CancelReservation";
 
 function ReservationList({ reservations, loadDashboard }) {
@@ -16,20 +17,22 @@ function ReservationList({ reservations, loadDashboard }) {
       {reservation.status === "booked" ? (
         <React.Fragment>
           <td>
-            <a
-              href={`/reservations/${reservation.reservation_id}/seat`}
+            {/* Replace <a> with <Link> for Seat link */}
+            <Link
+              to={`/reservations/${reservation.reservation_id}/seat`}
               className="btn btn-outline-primary btn-sm"
             >
               Seat
-            </a>
+            </Link>
           </td>
           <td>
-            <a
-              href={`/reservations/${reservation.reservation_id}/edit`}
+            {/* Replace <a> with <Link> for Edit link */}
+            <Link
+              to={`/reservations/${reservation.reservation_id}/edit`}
               className="btn btn-outline-secondary btn-sm"
             >
               Edit
-            </a>
+            </Link>
           </td>
           <td>
             <CancelReservation
