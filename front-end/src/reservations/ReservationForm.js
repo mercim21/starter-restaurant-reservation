@@ -78,7 +78,7 @@ function ReservationForm({
             name="mobile_number"
             id="mobile_number"
             type="text"
-            maxLength="10"
+            maxLength="12"
             required={true}
             value={reservationData.mobile_number || ""}
             placeholder="Mobile Number"
